@@ -48,3 +48,24 @@ The program produces a README_SUMMARY.md file with the following structure:
 - Tables under each section with columns for script names and their summaries
 
 This structure provides a clear, organized overview of all scripts in the project, making it easy for developers to understand the purpose of each script at a glance.
+
+## Usage
+
+Here's an example script that demonstrates how to use the script_summarizer.py script from anywhere in the terminal:
+```bash
+#!/usr/bin/env bash
+main() {
+  # Check if the correct number of arguments are supplied
+  if [ "$#" -eq 0 ]; then
+      echo "Usage: $(basename $0) [-h] [--all] path"
+      exit 1
+  fi
+
+  cd ~/Developer/python/script-summarizer
+  source ./.venv/bin/activate
+  python main.py "$@"
+  deactivate
+  cd - > /dev/null 2>&1
+}
+main "$@"
+````
