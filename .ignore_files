@@ -1,0 +1,6 @@
+.git
+.config
+.DS_Store
+.gitignore
+README*.md
+*.old
