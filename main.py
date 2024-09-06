@@ -106,7 +106,8 @@ def create_readme(summaries, output_file):
     with open(output_file, 'w', encoding='utf-8') as readme:
         readme.write("# Script Summaries\n\n")
 
-        for folder, folder_summaries in grouped_summaries.items():
+        # Sort the folders
+        for folder in sorted(grouped_summaries.keys()):
             if folder:
                 readme.write(f"## {folder}\n\n")
             else:
@@ -114,9 +115,11 @@ def create_readme(summaries, output_file):
             
             readme.write("| Script | Description |\n")
             readme.write("| ------ | ----------- |\n")
-            for script, description in folder_summaries:
+            # Sort the files within each folder
+            for script, description in sorted(grouped_summaries[folder]):
                 readme.write(f"| {script} | {description} |\n")
             readme.write("\n")
+
 
 
 async def main():

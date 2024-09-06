@@ -4,3 +4,4 @@
 .gitignore
 README*.md
 *.old
+zshrc_refresh
