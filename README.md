@@ -49,6 +49,35 @@ The program produces a README_SUMMARY.md file with the following structure:
 
 This structure provides a clear, organized overview of all scripts in the project, making it easy for developers to understand the purpose of each script at a glance.
 
+## Installation
+
+To set up the Script Summarizer on your local machine, follow these steps:
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/script-summarizer.git && cd script-summarizer
+```
+2. Create a virtual environment:
+```bash
+python3 -m venv .venv
+```
+3. Activate the virtual environment:
+```bash
+source .venv/bin/activate
+```
+4. Install the required packages:
+```bash
+pip install -r requirements.txt
+```
+5. Set up your OpenAI API key:
+- Create a `.env` file in the project root
+- Add your API key to the file:
+  ```
+  OPENAI_API_KEY=your_api_key_here
+  ```
+
+6. You're now ready to use the Script Summarizer!
+
 ## Usage
 
 Here's an example script of how to use the script-summarizer.py script from anywhere in the terminal:

@@ -138,8 +138,9 @@ async def main():
     else:
         summaries = await analyze_single_file(path)
     
-    create_readme(summaries, "README_SUMMARY.md")
-    print("README_SUMMARY.md has been created with the script summaries.")
+    output_file = os.path.join(path, 'README_SUMMARY.md')
+    create_readme(summaries, output_file)
+    print(f"{output_file} has been created with the script summaries.")
 
 if __name__ == "__main__":
     asyncio.run(main())
