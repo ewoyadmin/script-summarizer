@@ -99,3 +99,7 @@ main() {
 }
 main "$@"
 ```
+
+## Example of README_SUMMARY.md
+
+<img src="example.png" alt="Script Summary" width="500"/>
