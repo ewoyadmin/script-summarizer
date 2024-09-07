@@ -80,14 +80,37 @@ pip install -r requirements.txt
 
 ## Usage
 
-Here's an example script of how to use the script-summarizer.py script from anywhere in the terminal:
+Arguments:
+
+- path: Path to the folder or file to analyze
+- --all: Analyze all files regardless of extension
+- --test: Test file selection without performing analysis\
+The --test flag allows you to preview which files would be selected for analysis without actually performing the summarization. This is useful for verifying your file selection criteria before running a full analysis.
+
+Example usage:
+
+#### Analyze a folder
+```
+python main.py /path/to/your/scripts
+```
+#### Analyze all files in a folder, including non-script files
+```
+python main.py --all /path/to/your/scripts
+```
+#### Test file selection without analysis
+```
+python main.py --test /path/to/your/scripts
+```
+When using the --test flag, the script will output a list of files that would be selected for analysis, without generating summaries or creating the README_SUMMARY.md file.
+
+### Here's an example script of how to use the script-summarizer.py script from anywhere in the terminal:
 
 ```bash
 #!/usr/bin/env bash
 main() {
   # Check if the correct number of arguments are supplied
   if [ "$#" -eq 0 ]; then
-      echo "Usage: $(basename $0) [-h] [--all] path"
+      echo "Usage: $(basename $0) [-h] [--all] [--test] path"
       exit 1
   fi
 

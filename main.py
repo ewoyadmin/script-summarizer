@@ -120,12 +120,30 @@ def create_readme(summaries, output_file):
                 readme.write(f"| {script} | {description} |\n")
             readme.write("\n")
 
+async def test_file_selection(folder_path, ignore_patterns, analyze_all):
+    selected_files = []
+    for root, dirs, files in os.walk(folder_path):
+        dirs[:] = [d for d in dirs if not should_ignore(os.path.join(root, d), folder_path, ignore_patterns)]
+        
+        for file in files:
+            if analyze_all or file.endswith(('.sh', '.bash', '.py', '.js', '.ts')):
+                file_path = os.path.join(root, file)
+                
+                if not should_ignore(file_path, folder_path, ignore_patterns):
+                    relative_path = os.path.relpath(file_path, folder_path)
+                    selected_files.append(relative_path)
+
+    print("Files selected for analysis:")
+    for file in sorted(selected_files):
+        print(file)
+    print(f"\nTotal files selected: {len(selected_files)}")
 
 
 async def main():
     parser = argparse.ArgumentParser(description="Analyze scripts in a folder or a single file and create a README_SUMMARY.md")
     parser.add_argument("path", help="Path to the folder or file to analyze")
     parser.add_argument("--all", action="store_true", help="Analyze all files regardless of extension")
+    parser.add_argument("--test", action="store_true", help="Test file selection without performing analysis")
     args = parser.parse_args()
 
     path = args.path
@@ -133,21 +151,26 @@ async def main():
         print("Invalid path.")
         return
 
-    # Determine the root path
     root_path = path if os.path.isdir(path) else os.path.dirname(path)
-
     fileignore_path = os.path.join('.', '.ignore_files')
     ignore_patterns = parse_fileignore(fileignore_path)
     
     if os.path.isdir(path):
-        summaries = await analyze_folder(path, ignore_patterns, args.all)
+        if args.test:
+            await test_file_selection(path, ignore_patterns, args.all)
+        else:
+            summaries = await analyze_folder(path, ignore_patterns, args.all)
+            output_file = os.path.join(root_path, 'README_SUMMARY.md')
+            create_readme(summaries, output_file)
+            print(f"{output_file} has been created with the script summaries.")
     else:
-        summaries = await analyze_single_file(path)
-    
-    # Create the output file in the root path
-    output_file = os.path.join(root_path, 'README_SUMMARY.md')
-    create_readme(summaries, output_file)
-    print(f"{output_file} has been created with the script summaries.")
+        if args.test:
+            print(f"Selected file for analysis: {path}")
+        else:
+            summaries = await analyze_single_file(path)
+            output_file = os.path.join(root_path, 'README_SUMMARY.md')
+            create_readme(summaries, output_file)
+            print(f"{output_file} has been created with the script summaries.")
 
 if __name__ == "__main__":
     asyncio.run(main())

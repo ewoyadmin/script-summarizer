@@ -1,5 +1,6 @@
 .venv
-vend
+venv
+dist
 .git
 .config
 .DS_Store
@@ -7,7 +8,18 @@ vend
 .vscode
 .eslint*
 .cdsrc*
+.editorconfig
+.prettier*
+.yo-rc.json
 *.md
 *.old
 *.csv
+*.log
+i18n
+css
 zshrc_refresh
+package.json
+package-lock.json
+tsconfig.json
+ui5*.yaml
+LICENSE
