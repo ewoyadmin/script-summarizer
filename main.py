@@ -133,6 +133,9 @@ async def main():
         print("Invalid path.")
         return
 
+    # Determine the root path
+    root_path = path if os.path.isdir(path) else os.path.dirname(path)
+
     fileignore_path = os.path.join('.', '.ignore_files')
     ignore_patterns = parse_fileignore(fileignore_path)
     
@@ -141,7 +144,8 @@ async def main():
     else:
         summaries = await analyze_single_file(path)
     
-    output_file = os.path.join(path, 'README_SUMMARY.md')
+    # Create the output file in the root path
+    output_file = os.path.join(root_path, 'README_SUMMARY.md')
     create_readme(summaries, output_file)
     print(f"{output_file} has been created with the script summaries.")
 
