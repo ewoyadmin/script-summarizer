@@ -2,6 +2,10 @@
 .config
 .DS_Store
 .gitignore
-README*.md
+.vscode
+.eslint*
+.cdsrc*
+*.md
 *.old
+*.csv
 zshrc_refresh
