@@ -15,6 +15,20 @@ dist
 *.old
 *.csv
 *.log
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.tar
+*.tar.gz
+*.tar.xz
+*.zip
+*.rar
+*.7z
+*.dmg
+*.txt
 i18n
 css
 zshrc_refresh
@@ -22,4 +36,5 @@ package.json
 package-lock.json
 tsconfig.json
 ui5*.yaml
-LICENSE
+LICENSE*
+webapp/changes
